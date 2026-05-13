@@ -1,351 +1,183 @@
 # ImGui Forge Builder
 
-**ImGui Forge Builder** is a local visual editor for designing modern Dear ImGui-style menus without manually writing every UI element first.
+ImGui Forge Builder is a local visual builder for designing Dear ImGui-style menus, tools, launchers, overlays, debug panels, and software interfaces. It gives you a toolbox, live preview canvas, hierarchy, properties inspector, theme editor, JSON project save/load, validation, and clean Dear ImGui C++ export.
 
-It lets you visually create menu layouts, organize components into categories, customize themes, preview the design live, save/load projects, insert polished presets, and export clean Dear ImGui C++ code.
+## Install
 
-> Built for designing legitimate GUI menus, tools, launchers, overlays, debug panels, software panels, and custom interfaces.
+```bash
+pip install PySide6
+```
 
----
+## Run
 
-## Preview
+From this folder:
 
-ImGui Forge Builder includes a professional editor layout with:
+```bash
+python main.py
+```
 
-- Left-side component toolbox
-- Center live preview canvas
-- Right-side properties inspector
-- Theme editor
-- Presets library
-- Category/navigation builder
-- Bottom output/log/code panel
-- Save/load project system
-- Dear ImGui C++ exporter
+From the workspace root:
 
----
+```bash
+python imgui_forge_builder/main.py
+```
 
-## Features
+## Basic Workflow
 
-### Visual Menu Builder
+1. Pick a starter template from the left panel and press **Apply**, or use **New** for the minimal template.
+2. Add categories with **Add Cat** in the hierarchy panel.
+3. Click toolbox components to add them to the active category.
+4. Select a component in the hierarchy or preview canvas.
+5. Edit labels, variable names, sizes, defaults, tooltip text, colors, and type-specific settings in the **Properties** tab.
+6. Use **Theme** to change colors, spacing, rounding, font scale, border thickness, and shadow style.
+7. Use **Presets** to insert polished multi-component blocks such as hero sections, login forms, status panels, social footers, animated backgrounds, and config managers.
+8. Use the bottom **Generated C++** tab to inspect exported Dear ImGui code live.
 
-Create ImGui-style menus visually using editable components such as:
+## Components
 
-- Buttons
-- Text labels
-- Header text
-- Checkboxes/toggles
-- Sliders
-- Combo boxes
-- Input fields
-- Separators
-- Social links
-- Feature cards
-- Status badges
-- Image/icon placeholders
-- Footer text
-- Navigation categories
-- Tab buttons
+The toolbox currently includes:
 
-The preview canvas gives a live visual approximation of what the final menu will look like.
+- Button
+- Toggle / Checkbox
+- Slider Float
+- Slider Int
+- Combo Box
+- Text Label
+- Header Text
+- Separator
+- Input Text
+- Color Picker placeholder
+- Keybind placeholder
+- Icon Button
+- Social Link
+- Feature Card
+- Status Badge
+- Image/Icon placeholder
+- Nav Category
+- Tab Button
+- Footer Text
 
----
+Interactive widgets create config variables automatically. You can rename those variables in the inspector before export.
 
-### Component Toolbox
+## Element Presets
 
-Quickly add UI elements into the selected category or tab.
+The **Presets** tab contains reusable blocks with a thumbnail card, description, tags, filter, and one-click **Add to Menu** button. Inserting a preset creates real editable components in the active category and wraps them in a lightweight group.
 
-Supported actions include:
+Built-in preset families include:
 
-- Add components
-- Select components
-- Edit properties
-- Duplicate elements
-- Delete elements
-- Reorder elements
-- Auto-layout support
-- Free-layout positioning
-- Snap-to-grid style editing
+- Hero CTA and launch blocks
+- Slider and toggle cards
+- Combo selector cards
+- Social link blocks
+- Feature and locked feature cards
+- Account/license status panels
+- Config manager panels
+- Modern login/auth blocks
+- Animated background presets
+- Navigation starter blocks
 
----
+Select a component or group and use **Save as Preset** to store a custom preset in `projects/custom_presets.json`.
 
-### Categories and Navigation
+## Animations And Backgrounds
 
-Build organized menu layouts with custom categories.
+Animation settings are available in the inspector for the whole menu, selected groups, and individual components. Supported animation metadata includes fade, slide, pulse glow, hover glow/scale, floating, shake, loading dots, animated gradient, particle drift, and scanline sweep.
 
-Example categories:
+The **Theme** tab also includes background controls:
 
-- Home
-- Settings
-- Configs
-- Socials
-- Dashboard
-- Tools
-- About
-
-Navigation supports multiple styles and positions:
-
-- Left sidebar
-- Right sidebar
-- Top tabs
-- Bottom navigation
-- Pill tabs
-- Icon/sidebar style layouts
-
----
-
-### Properties Inspector
-
-Every selected component can be edited from the properties panel.
-
-Common editable properties include:
-
-- Label/text
-- Variable name
-- Width and height
-- X/Y position
-- Category assignment
-- Tooltip
-- Visibility
-- Enabled/disabled state
-- Colors
-- Component-specific options
-
-Examples:
-
-Checkboxes create boolean variables.
-
-Sliders create integer or float variables.
-
-Combo boxes create selectable option lists.
-
-Buttons create callback placeholder names.
-
----
-
-### Theme Editor
-
-Customize the full look of the menu with advanced theme controls.
-
-Theme options include:
-
-- Primary background
-- Secondary background
-- Panel color
-- Card color
-- Sidebar color
-- Accent color
-- Secondary accent color
-- Navigation active color
-- Navigation hover color
-- Text color
-- Muted text color
-- Border color
-- Shadow/glow color
-- Success color
-- Warning color
-- Danger color
-- Rounding
-- Border thickness
-- Item spacing
-- Frame padding
-- Window padding
-- Font scale
-- Button height
-- Card padding
-- Glow intensity
-- Transparency/alpha
-
-Included theme presets:
-
-- Cyber Blue
-- Neon Purple
-- Emerald Matrix
-- Redline Dark
-- Frosted Glass
-- Minimal Pro
-- Midnight Gold
-- Toxic Green
-- Ocean Glow
-- Sunset Neon
-
----
-
-### Animated Backgrounds
-
-ImGui Forge Builder supports animated background presets in the preview.
-
-Background types include:
-
-- Solid color
-- Linear gradient
-- Animated gradient
-- Cyber grid
-- Floating particles
-- Glow orbs
+- Solid Color
+- Linear Gradient Preview
+- Animated Gradient
+- Cyber Grid
+- Floating Particles
+- Glow Orbs
 - Starfield
 - Scanlines
-- Glassmorphism preview
-- Noise texture simulation
+- Glassmorphism Blur Preview
+- Noise Texture Simulation
 
-Background settings include:
+Use **Play Animations** and **Reset Anim** in the toolbar to preview motion in the canvas.
 
-- Primary color
-- Secondary color
-- Accent color
-- Animation speed
-- Particle count
-- Grid size
-- Glow intensity
-- Opacity
-- Blur/softness approximation
+## Categories And Navigation
 
-Exported code includes commented ImGui draw-list stubs so the background can be recreated in a real Dear ImGui project.
+Categories are shown in the hierarchy and preview navigation. Select a category to make it active. You can add, rename, delete, reorder, and assign icons to categories.
 
----
+Navigation options:
 
-### Animation System
+- left
+- right
+- top
+- bottom
 
-Components, groups, presets, and backgrounds can store animation settings.
+Navigation styles:
 
-Supported animation types include:
+- vertical sidebar
+- top tabs
+- pill tabs
+- icon sidebar
 
-- None
-- Fade In
-- Slide In Left
-- Slide In Right
-- Slide In Up
-- Slide In Down
-- Pulse Glow
-- Hover Scale
-- Hover Glow
-- Border Glow
-- Floating
-- Shake Error
-- Loading Dots
-- Animated Gradient
-- Particle Drift
-- Scanline Sweep
+## Layout
 
-Animation properties include:
+Auto layout stacks components vertically using theme spacing and padding. Free layout lets you drag components around the preview canvas and stores `x` / `y` coordinates. Snap-to-grid can be toggled from the toolbar or layout panel.
 
-- Enabled/disabled
-- Animation type
-- Duration
-- Delay
-- Speed
-- Intensity
-- Looping
-- Easing mode
+Toolbar layout helpers:
 
-Exported code includes comments and helper stubs showing where to connect animation logic using `ImGui::GetTime()`.
+- **Align Left**
+- **Align Center**
+- **Align Right**
+- **Distribute**
 
----
+## Save And Load
 
-### Element Presets Library
+Use **Save** and **Load** to store projects as JSON. The JSON includes project metadata, menu size, theme, navigation settings, categories, components, properties, and layout state.
 
-The builder includes a presets panel for inserting polished reusable UI blocks.
+The default save location is:
 
-Each preset includes:
+```text
+projects/my_menu.json
+```
 
-- Name
-- Description
-- Tags
-- Category
-- Preview-style card
-- One-click add button
-- Real editable components after insertion
+## Export Dear ImGui Code
 
-Preset categories include:
+Use **Copy Code** to copy generated C++ to the clipboard, or **Export Code** to save a `.cpp` file.
 
-- Hero Sections
-- Feature Cards
-- Buttons
-- Sliders
-- Toggles
-- Social Blocks
-- Status Panels
-- Login/Auth Blocks
-- Config Blocks
-- Animated Backgrounds
-- Navigation Styles
-- Info Panels
-- Dashboard Cards
+Use **Copy Element Code** to copy only the selected component or preset group as a standalone ImGui block.
 
-Included preset examples:
+The generated code includes:
 
-- Hero CTA Block
-- Launch Panel
-- Welcome Action Card
-- Premium Slider Row
-- Settings Slider Card
-- Glow Toggle Card
-- Feature Toggle Row
-- Mode Selector
-- Theme Dropdown Card
-- Creator Social Footer
-- Social Hub Block
-- Premium Feature Card
-- Locked Feature Tile
-- Account Status Panel
-- License Info Card
-- Config Manager Panel
-- Modern Login Block
-- Cyber Grid Background
-- Floating Particles Background
-- Gradient Glow Background
+- `ApplyCustomTheme()`
+- `RenderBackground()`
+- `RenderMenu()`
+- navigation rendering
+- one render function per category
+- static config variables for checkboxes, sliders, combos, inputs, color pickers, and keybind placeholders
+- placeholder callbacks for buttons and icon buttons
+- animation helper stubs/comments when animations are used
+- TODO comments where real runtime behavior should be connected
 
-Presets are inserted as real components, not fake mockups, so they can be edited after being added.
+The exported code is a clean starting point. You still connect real application behavior, texture loading, URL opening, key capture, persistence, and callback bodies manually in your own project.
 
----
+## Validation
 
-### Full Menu Templates
+Before export/copy, the builder checks for common issues:
 
-ImGui Forge Builder includes animated full-menu templates.
+- duplicate variable names
+- empty menu title
+- empty category names
+- empty component labels
+- invalid social URLs
+- missing image/icon paths
+- unusually small menu sizes
 
-Templates include:
+Warnings are shown in the bottom log panel and status bar.
 
-- Premium Software Launcher
-- Cyber Settings Menu
-- Creator/Social Hub
-- Config Manager UI
-- Minimal Professional Menu
+## Extending Components
 
-Templates can include:
+New component types are easiest to add in this order:
 
-- Categories
-- Components
-- Presets
-- Themes
-- Backgrounds
-- Animations
-- Social blocks
-- Feature cards
-- Config panels
-- Status panels
+1. Add a `ComponentDefinition` in `components.py`.
+2. Add preview drawing in `canvas.py`.
+3. Add editable fields in `properties.py`.
+4. Add C++ export logic in `code_exporter.py`.
+5. Optionally add template usage in `assets.py`.
 
----
-
-### Save and Load Projects
-
-Projects can be saved and loaded as JSON.
-
-Saved project data includes:
-
-- Project name
-- Menu title
-- Window size
-- Theme settings
-- Background settings
-- Navigation style
-- Navigation position
-- Categories
-- Components
-- Groups
-- Preset blocks
-- Animation settings
-- Layout mode
-
-Default save location:
-
-```txt
-projects/
+The project model is intentionally UI-agnostic, so new widgets can be serialized, previewed, and exported without rewriting the whole app.
